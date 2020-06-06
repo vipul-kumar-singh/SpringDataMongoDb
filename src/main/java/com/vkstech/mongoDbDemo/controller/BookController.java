@@ -47,4 +47,10 @@ public class BookController {
         LOGGER.info("BookController :: deleteBookById -> {}", id);
         return bookService.deleteBookById(id);
     }
+
+    @GetMapping("find")
+    public ResponseEntity<ResponseDto> getBookByAuthor(@RequestParam String author) {
+        LOGGER.info("BookController :: getBookByAuthor -> {}", author);
+        return bookService.getBookByAuthor(author);
+    }
 }

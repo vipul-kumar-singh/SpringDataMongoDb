@@ -66,4 +66,10 @@ public class BookService {
         bookRepository.save(book);
         return new ResponseEntity<>(new ResponseDto(bookdto, ResponseMsg.BOOK_SAVED), HttpStatus.OK);
     }
+
+    public ResponseEntity<ResponseDto> getBookByAuthor(String author) {
+        LOGGER.info("BookService :: getBookByAuthor -> {}", author);
+        List<Book> books = bookRepository.findByAuthorName(author);
+        return new ResponseEntity<>(new ResponseDto(books, ResponseMsg.BOOKS_FETCHED), HttpStatus.OK);
+    }
 }
