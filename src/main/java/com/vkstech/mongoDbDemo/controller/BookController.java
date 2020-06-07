@@ -3,9 +3,11 @@ package com.vkstech.mongoDbDemo.controller;
 import com.vkstech.mongoDbDemo.dto.BookDto;
 import com.vkstech.mongoDbDemo.dto.ResponseDto;
 import com.vkstech.mongoDbDemo.service.BookService;
+import com.vkstech.mongoDbDemo.service.QueryBuilderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,9 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private QueryBuilderService queryBuilderService;
 
     @PostMapping("add")
     public ResponseEntity<ResponseDto> saveBook(@RequestBody BookDto bookDto) {
@@ -52,5 +57,18 @@ public class BookController {
     public ResponseEntity<ResponseDto> getBookByAuthor(@RequestParam String author) {
         LOGGER.info("BookController :: getBookByAuthor -> {}", author);
         return bookService.getBookByAuthor(author);
+    }
+
+    @GetMapping("operations")
+    public ResponseEntity<ResponseDto> performQueryOperations() {
+        LOGGER.info("BookController :: performQueryOperations");
+        queryBuilderService.isQuery();
+        queryBuilderService.regexQuery();
+        queryBuilderService.ltAndGtQuery();
+        queryBuilderService.sortQuery();
+        queryBuilderService.pageableQuery();
+        queryBuilderService.updateQuery();
+        queryBuilderService.deleteQuery();
+        return new ResponseEntity<>(new ResponseDto("Query Operations performed successfully"), HttpStatus.OK);
     }
 }
