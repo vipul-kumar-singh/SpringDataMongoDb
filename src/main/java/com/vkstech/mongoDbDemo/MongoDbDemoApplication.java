@@ -1,7 +1,9 @@
 package com.vkstech.mongoDbDemo;
 
 import com.vkstech.mongoDbDemo.model.Book;
+import com.vkstech.mongoDbDemo.model.SchoolBooks;
 import com.vkstech.mongoDbDemo.repository.BookRepository;
+import com.vkstech.mongoDbDemo.repository.SchoolBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,12 +11,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @SpringBootApplication
 public class MongoDbDemoApplication implements CommandLineRunner {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private SchoolBookRepository schoolBookRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MongoDbDemoApplication.class, args);
@@ -104,4 +110,14 @@ public class MongoDbDemoApplication implements CommandLineRunner {
 //		list.add(b5);
 //		bookRepository.saveAll(list);
 //	}
+
+//    @Override
+//    public void run(String... args) {
+//
+//        SchoolBooks b = schoolBookRepository.findById(101L).orElse(null);
+//        if (Objects.nonNull(b))
+//            System.out.println(b.getBookName());
+//        else
+//            System.out.println("SchoolBook Not Found");
+//    }
 }
